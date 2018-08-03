@@ -19,9 +19,15 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Integer> answers = new ArrayList<Integer>();
     int locateAns, score, numOfQuestions;
 
-    public void playAgain(){
+    public void playAgain(View view){
         score =0;
         numOfQuestions=0;
+        scoreView.setText("0/0");
+        play.setVisibility(View.INVISIBLE);
+        button1.setEnabled(true);
+        button2.setEnabled(true);
+        button3.setEnabled(true);
+        button4.setEnabled(true);
 
         CountDownTimer timer = new CountDownTimer(30000, 1000){
             public void onTick(long m){
@@ -31,11 +37,14 @@ public class MainActivity extends AppCompatActivity {
             public void onFinish(){
                 play.setVisibility(View.VISIBLE);
                 result.setText("Times UP!");
+                button1.setEnabled(false);
+                button2.setEnabled(false);
+                button3.setEnabled(false);
+                button4.setEnabled(false);
             }
         };
 
         timer.start();
-
 
     }
 
@@ -58,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
         // Correct sum
         int a = rand.nextInt(21);
         int b = rand.nextInt(21);
-
 
         question.setText(Integer.toString(a)+ " + " + Integer.toString(b));
 
@@ -84,9 +92,6 @@ public class MainActivity extends AppCompatActivity {
         button4.setText(Integer.toString(answers.get(3)));
     }
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
         nextQuestion();
 
-        playAgain();
+        playAgain(findViewById(R.id.resultView));
 
 
     }
